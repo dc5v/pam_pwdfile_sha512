@@ -1,0 +1,70 @@
+pam_pwdfile_sha512
+==================
+
+
+This project is a fork of https://github.com/tiwe-de/libpam-pwdfile, 
+providing authentication using SHA512 instead of MD5, as SHA512 is considered more secure.
+
+
+Author
+------
+
+Kinomoto <dev@dc5v.com>
+
+
+Build and Installation Instructions
+-----------------------------------
+
+Administrator privileges (sudo) are required to install this into the system shared library where pam_unix.so is installed. 
+Please refer to the Makefile for detailed instructions.
+
+1. Install the required packages:
+sudo apt-get install -y libpam0g-dev libssl-dev
+
+2. Build and install using the following commands:
+make
+sudo make install
+
+
+Usage Instructions
+------------------
+
+To maintain ease of configuration management, this implementation follows the existing pam_pwdfile configuration method and the IPSEC EAP configuration method. 
+Below are examples of configuration files and user information.
+
+.../pam.d/charon:
+auth    required    pam_pwdfile_sha512.so pwdfile=.../userdata.secret
+
+.../userdata.secret:
+user1:$2y$10$7Bv6eA8aA5uX9G87S0D8N8R7S9.X5F3Q1V6C3M1P9Q1G1A5N2MT7K
+user2:$2y$10$8H1L2J5KR8T1A2P4F9N1K3L2E8D9G7M6J5R3Q8T0N1A7L3N4M6Q7
+
+
+Required Packages for Building
+------------------------------
+
+- libpam0g-dev
+- libssl-dev
+
+
+Reason for This Authentication Method
+-------------------------------------
+
+The IPSEC VPN server I manage updates its secret key once a week. The secret key is designed to be securely distributed to users directly. However, it is very inconvenient to update the IPSEC authentication information on users' mobile devices every week. Forced updates via MDM are either insecure or cause user dissatisfaction.
+
+Therefore, whenever the secret key is updated, arbitrary authentication information without the user's PAM authentication information is also updated, providing fresh secret keys and QR codes every week. 
+While I acknowledge that this method compromises security for convenience, 
+
+"However, with the current idea that comes to mind, I believe this is the best solution."
+
+
+Disclaimer and Caution
+----------------------
+
+This software is provided "as is" without any warranties. The author is not responsible for any direct or indirect damages resulting from the use of this software. The user assumes all risks associated with the use of this software. Please thoroughly review and test to ensure suitability for your system before use.
+
+
+License
+-------
+
+This project is distributed under the Unlicense. Feel free to use it as you see fit, and feedback is welcome.
