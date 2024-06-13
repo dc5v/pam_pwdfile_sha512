@@ -2,7 +2,7 @@ pam_pwdfile_sha512
 ==================
 
 
-이 프로젝트는 기존의 libpam-pwdfile은 MD5를 사용한 인증 방식을 제공하지만, MD5보다 SHA512가 더 안전할 것이라는 판단 하에 본 프로젝트는 보안이 더 뛰어난 SHA512를 사용한 인증 방식을 제공합니다.
+기존의 libpam-pwdfile은 MD5를 사용한 인증 방식을 제공하지만, MD5보다 SHA512가 더 안전할 것이라는 판단 하에 본 프로젝트는 보안이 더 뛰어난 SHA512를 사용한 인증 방식을 제공합니다.
 이 프로젝트는 https://github.com/tiwe-de/libpam-pwdfile 를 포크한 것입니다.
 
 
